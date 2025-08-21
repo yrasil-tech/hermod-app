@@ -12,6 +12,7 @@ import { Suspense, useState } from "react"
 interface ContactInfo {
   name: string
   phone: string
+  title: string
   email: string
   website: string
   github: string
@@ -25,12 +26,13 @@ function CardDisplay() {
   const [isFlipped, setIsFlipped] = useState(false)
 
   const contactInfo: ContactInfo = {
-    name: searchParams.get("name") || "Nguyễn Quang Minh",
-    phone: searchParams.get("phone") || "0777674857",
-    email: searchParams.get("email") || "minhnq.dev@gmail.com",
-    website: searchParams.get("website") || "https://yrasil.dev",
-    github: searchParams.get("github") || "minhnq0702",
-    linkedin: searchParams.get("linkedin") || "minhne-dev",
+    name: searchParams.get("name") || "Nguyễn Thế Bảo",
+    title: searchParams.get("title") || "Phó trưởng phòng Phòng Tổ chức Hành chính",
+    phone: searchParams.get("phone") || "0934357227",
+    email: searchParams.get("email") || "thebao@hcmute.edu.vn",
+    website: searchParams.get("website") || "https://hcmute.edu.vn/",
+    github: searchParams.get("github") || "",
+    linkedin: searchParams.get("linkedin") || "",
     twitter: searchParams.get("twitter") || "",
     photo: searchParams.get("photo") || "/images/profile-avatar.jpg",
   }
@@ -119,6 +121,7 @@ function CardDisplay() {
                       </div>
                     )}
                     <h2 className="text-4xl font-bold text-white mb-2 tracking-tight">{contactInfo.name}</h2>
+                    <p className="text-xl font-semibold text-gray-300 mb-2 tracking-tight">{contactInfo.title}</p>
                     <p className="text-gray-300 text-lg">Click to view contact info</p>
                   </div>
 
