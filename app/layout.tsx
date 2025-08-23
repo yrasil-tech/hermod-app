@@ -1,9 +1,16 @@
-import { ThemeProvider } from "@/components/theme-provider";
-import { GeistMono } from "geist/font/mono";
-import { GeistSans } from "geist/font/sans";
+// import { GeistMono } from "geist/font/mono";
+// import { GeistSans } from "geist/font/sans";
+import { IBM_Plex_Mono } from "next/font/google";
 
 import type { Metadata } from "next";
 import "./globals.css";
+
+const spaceMono = IBM_Plex_Mono({
+  subsets: ["latin", "vietnamese"],
+  weight: ["100", "200", "300", "400", "500", "600", "700"],
+  variable: "--font-space-mono", // biến CSS custom để dùng trong tailwind
+  display: "swap",
+});
 
 export const metadata: Metadata = {
   title: "v0 App",
@@ -17,19 +24,9 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en">
-      <head>
-        <style>{`
-html {
-  font-family: ${GeistSans.style.fontFamily};
-  --font-sans: ${GeistSans.variable};
-  --font-mono: ${GeistMono.variable};
-}
-        `}</style>
-      </head>
-      <body>
-        <ThemeProvider attribute="class">{children}</ThemeProvider>
-      </body>
+    <html lang="en" className={spaceMono.className}>
+      <head></head>
+      <body>{children}</body>
     </html>
   );
 }
