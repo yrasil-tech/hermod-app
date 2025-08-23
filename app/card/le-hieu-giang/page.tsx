@@ -5,18 +5,7 @@ import { Card, CardContent } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Separator } from "@/components/ui/separator";
 import { QRCodeSVG } from "qrcode.react";
-import {
-  Phone,
-  Mail,
-  Globe,
-  Github,
-  Linkedin,
-  Twitter,
-  Download,
-  ArrowLeft,
-  RotateCcw,
-  Shield,
-} from "lucide-react";
+import { Phone, Mail, Globe, Github, Linkedin, Twitter, Download, ArrowLeft, RotateCcw, Shield } from "lucide-react";
 import Link from "next/link";
 import { Suspense, useState } from "react";
 
@@ -38,8 +27,7 @@ function CardDisplay() {
 
   const contactInfo: ContactInfo = {
     name: searchParams.get("name") || "Lê Hiếu Giang",
-    title:
-      searchParams.get("title") || "Hiệu trưởng",
+    title: searchParams.get("title") || "Hiệu trưởng",
     phone: searchParams.get("phone") || "0938 308 141",
     email: searchParams.get("email") || "gianglh@hcmute.edu.vn",
     website: searchParams.get("website") || "https://hcmute.edu.vn/",
@@ -58,8 +46,7 @@ function CardDisplay() {
       contactInfo.email && `EMAIL:${contactInfo.email}`,
       contactInfo.website && `URL:${contactInfo.website}`,
       contactInfo.github && `URL:https://github.com/${contactInfo.github}`,
-      contactInfo.linkedin &&
-        `URL:https://linkedin.com/in/${contactInfo.linkedin}`,
+      contactInfo.linkedin && `URL:https://linkedin.com/in/${contactInfo.linkedin}`,
       contactInfo.twitter && `URL:https://twitter.com/${contactInfo.twitter}`,
       "END:VCARD",
     ]
@@ -86,18 +73,12 @@ function CardDisplay() {
     <div className="min-h-screen flex flex-col bg-gradient-to-br from-black via-gray-900 to-gray-700 ">
       <div className="w-full bg-gray-900/95 backdrop-blur-sm border-b border-gray-700 z-20">
         <div className="max-w-4xl mx-auto px-4 sm:px-6 py-3 sm:py-4 flex items-center justify-center gap-3 sm:gap-4">
-          <img
-            src="/images/hcmute-logo.png"
-            alt="HCMUTE Logo"
-            className="w-8 h-8 sm:w-12 sm:h-12 object-contain"
-          />
+          <img src="/images/hcmute-logo.png" alt="HCMUTE Logo" className="w-8 h-8 sm:w-12 sm:h-12 object-contain" />
           <div className="text-center">
             <h1 className="text-base sm:text-xl font-bold text-white leading-tight">
               Ho Chi Minh City University of Technology and Education
             </h1>
-            <p className="text-xs sm:text-sm text-gray-300">
-              Official Digital Business Card
-            </p>
+            <p className="text-xs sm:text-sm text-gray-300">Official Digital Business Card</p>
           </div>
         </div>
       </div>
@@ -136,9 +117,7 @@ function CardDisplay() {
                       <p className="text-base sm:text-xl font-semibold text-gray-300 mb-2 tracking-tight">
                         {contactInfo.title}
                       </p>
-                      <p className="text-gray-300 text-sm sm:text-lg">
-                        Click to view contact info
-                      </p>
+                      <p className="text-gray-300 text-sm sm:text-lg">Click to view contact info</p>
                     </div>
 
                     <div className="space-y-4 sm:space-y-6 mb-6 sm:mb-10">
@@ -147,9 +126,7 @@ function CardDisplay() {
                           <div className="w-9 h-9 sm:w-12 sm:h-12 bg-blue-600/20 rounded-full flex items-center justify-center">
                             <Phone className="w-5 h-5 sm:w-6 sm:h-6 text-blue-400" />
                           </div>
-                          <span className="text-sm sm:text-lg font-medium">
-                            {contactInfo.phone}
-                          </span>
+                          <span className="text-sm sm:text-lg font-medium">{contactInfo.phone}</span>
                         </div>
                       )}
 
@@ -158,9 +135,7 @@ function CardDisplay() {
                           <div className="w-9 h-9 sm:w-12 sm:h-12 bg-blue-600/20 rounded-full flex items-center justify-center">
                             <Mail className="w-5 h-5 sm:w-6 sm:h-6 text-blue-400" />
                           </div>
-                          <span className="text-sm sm:text-lg font-medium break-words">
-                            {contactInfo.email}
-                          </span>
+                          <span className="text-sm sm:text-lg font-medium break-words">{contactInfo.email}</span>
                         </div>
                       )}
 
@@ -169,16 +144,12 @@ function CardDisplay() {
                           <div className="w-9 h-9 sm:w-12 sm:h-12 bg-blue-600/20 rounded-full flex items-center justify-center">
                             <Globe className="w-5 h-5 sm:w-6 sm:h-6 text-blue-400" />
                           </div>
-                          <span className="text-sm sm:text-lg font-medium break-all">
-                            {contactInfo.website}
-                          </span>
+                          <span className="text-sm sm:text-lg font-medium break-all">{contactInfo.website}</span>
                         </div>
                       )}
                     </div>
 
-                    {(contactInfo.github ||
-                      contactInfo.linkedin ||
-                      contactInfo.twitter) && (
+                    {(contactInfo.github || contactInfo.linkedin || contactInfo.twitter) && (
                       <>
                         <Separator className="my-6 sm:my-10 bg-gray-600" />
                         <div className="flex justify-center gap-4 sm:gap-8 flex-wrap">
@@ -187,9 +158,7 @@ function CardDisplay() {
                               <div className="w-10 h-10 sm:w-12 sm:h-12 bg-gray-700 rounded-full flex items-center justify-center">
                                 <Github className="w-5 h-5 sm:w-6 sm:h-6 text-gray-300" />
                               </div>
-                              <span className="text-xs sm:text-base font-medium break-all">
-                                {contactInfo.github}
-                              </span>
+                              <span className="text-xs sm:text-base font-medium break-all">{contactInfo.github}</span>
                             </div>
                           )}
                           {contactInfo.linkedin && (
@@ -197,9 +166,7 @@ function CardDisplay() {
                               <div className="w-10 h-10 sm:w-12 sm:h-12 bg-gray-700 rounded-full flex items-center justify-center">
                                 <Linkedin className="w-5 h-5 sm:w-6 sm:h-6 text-gray-300" />
                               </div>
-                              <span className="text-xs sm:text-base font-medium break-all">
-                                {contactInfo.linkedin}
-                              </span>
+                              <span className="text-xs sm:text-base font-medium break-all">{contactInfo.linkedin}</span>
                             </div>
                           )}
                           {contactInfo.twitter && (
@@ -207,9 +174,7 @@ function CardDisplay() {
                               <div className="w-10 h-10 sm:w-12 sm:h-12 bg-gray-700 rounded-full flex items-center justify-center">
                                 <Twitter className="w-5 h-5 sm:w-6 sm:h-6 text-gray-300" />
                               </div>
-                              <span className="text-xs sm:text-base font-medium break-all">
-                                {contactInfo.twitter}
-                              </span>
+                              <span className="text-xs sm:text-base font-medium break-all">{contactInfo.twitter}</span>
                             </div>
                           )}
                         </div>
@@ -223,23 +188,14 @@ function CardDisplay() {
                 <Card className="w-full h-full bg-gradient-to-br from-gray-800 via-gray-700 to-gray-600 shadow-2xl border border-gray-600">
                   <CardContent className="p-6 sm:p-12 h-full flex flex-col justify-center text-center">
                     <div className="mb-6 sm:mb-8">
-                      <h3 className="text-xl sm:text-3xl font-bold text-white mb-3 sm:mb-4">
-                        Save to Contacts
-                      </h3>
+                      <h3 className="text-xl sm:text-3xl font-bold text-white mb-3 sm:mb-4">Save to Contacts</h3>
                       <p className="text-gray-300 text-sm sm:text-lg mb-6 sm:mb-8">
-                        Scan with your phone camera to instantly add this
-                        contact
+                        Scan with your phone camera to instantly add this contact
                       </p>
                     </div>
 
                     <div className="bg-white p-4 sm:p-8 rounded-xl shadow-inner mb-6 sm:mb-8 inline-block mx-auto">
-                      <QRCodeSVG
-                        value={generateVCard()}
-                        size={150}
-                        level="M"
-                        includeMargin={true}
-                        fgColor="#1f2937"
-                      />
+                      <QRCodeSVG value={generateVCard()} size={150} level="M" includeMargin={true} fgColor="#1f2937" />
                     </div>
 
                     <Button
@@ -274,9 +230,7 @@ function CardDisplay() {
             </span>
             <div className="w-2 h-2 bg-green-400 rounded-full animate-pulse"></div>
           </div>
-          <p className="text-center text-[10px] sm:text-xs text-gray-400 mt-1">
-            Authenticated • Secure • Official
-          </p>
+          <p className="text-center text-[10px] sm:text-xs text-gray-400 mt-1">Authenticated • Secure • Official</p>
         </div>
       </div>
 

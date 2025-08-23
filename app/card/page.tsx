@@ -1,29 +1,29 @@
-"use client"
+"use client";
 
-import { useSearchParams } from "next/navigation"
-import { Card, CardContent } from "@/components/ui/card"
-import { Button } from "@/components/ui/button"
-import { Separator } from "@/components/ui/separator"
-import { QRCodeSVG } from "qrcode.react"
-import { Phone, Mail, Globe, Github, Linkedin, Twitter, Download, ArrowLeft, RotateCcw, Shield } from "lucide-react"
-import Link from "next/link"
-import { Suspense, useState } from "react"
+import { useSearchParams } from "next/navigation";
+import { Card, CardContent } from "@/components/ui/card";
+import { Button } from "@/components/ui/button";
+import { Separator } from "@/components/ui/separator";
+import { QRCodeSVG } from "qrcode.react";
+import { Phone, Mail, Globe, Github, Linkedin, Twitter, Download, ArrowLeft, RotateCcw, Shield } from "lucide-react";
+import Link from "next/link";
+import { Suspense, useState } from "react";
 
 interface ContactInfo {
-  name: string
-  phone: string
-  title: string
-  email: string
-  website: string
-  github: string
-  linkedin: string
-  twitter: string
-  photo: string
+  name: string;
+  phone: string;
+  title: string;
+  email: string;
+  website: string;
+  github: string;
+  linkedin: string;
+  twitter: string;
+  photo: string;
 }
 
 function CardDisplay() {
-  const searchParams = useSearchParams()
-  const [isFlipped, setIsFlipped] = useState(false)
+  const searchParams = useSearchParams();
+  const [isFlipped, setIsFlipped] = useState(false);
 
   const contactInfo: ContactInfo = {
     name: searchParams.get("name") || "Nguyễn Thế Bảo",
@@ -35,7 +35,7 @@ function CardDisplay() {
     linkedin: searchParams.get("linkedin") || "",
     twitter: searchParams.get("twitter") || "",
     photo: searchParams.get("photo") || "/images/profile-avatar.jpg",
-  }
+  };
 
   const generateVCard = () => {
     const vcard = [
@@ -51,23 +51,23 @@ function CardDisplay() {
       "END:VCARD",
     ]
       .filter(Boolean)
-      .join("\n")
+      .join("\n");
 
-    return vcard
-  }
+    return vcard;
+  };
 
   const downloadVCard = () => {
-    const vcard = generateVCard()
-    const blob = new Blob([vcard], { type: "text/vcard" })
-    const url = URL.createObjectURL(blob)
-    const a = document.createElement("a")
-    a.href = url
-    a.download = `${contactInfo.name.replace(/\s+/g, "_")}.vcf`
-    document.body.appendChild(a)
-    a.click()
-    document.body.removeChild(a)
-    URL.revokeObjectURL(url)
-  }
+    const vcard = generateVCard();
+    const blob = new Blob([vcard], { type: "text/vcard" });
+    const url = URL.createObjectURL(blob);
+    const a = document.createElement("a");
+    a.href = url;
+    a.download = `${contactInfo.name.replace(/\s+/g, "_")}.vcf`;
+    document.body.appendChild(a);
+    a.click();
+    document.body.removeChild(a);
+    URL.revokeObjectURL(url);
+  };
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-black via-gray-900 to-gray-700 p-4 relative">
@@ -207,8 +207,8 @@ function CardDisplay() {
 
                   <Button
                     onClick={(e) => {
-                      e.stopPropagation()
-                      downloadVCard()
+                      e.stopPropagation();
+                      downloadVCard();
                     }}
                     className="w-full h-12 bg-blue-600 hover:bg-blue-700 text-white text-lg mb-6"
                   >
@@ -253,7 +253,7 @@ function CardDisplay() {
         }
       `}</style>
     </div>
-  )
+  );
 }
 
 export default function CardPage() {
@@ -261,5 +261,5 @@ export default function CardPage() {
     <Suspense fallback={<div>Loading...</div>}>
       <CardDisplay />
     </Suspense>
-  )
+  );
 }

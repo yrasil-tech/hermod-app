@@ -1,25 +1,25 @@
-"use client"
+"use client";
 
-import type React from "react"
+import type React from "react";
 
-import { useState } from "react"
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
-import { Input } from "@/components/ui/input"
-import { Label } from "@/components/ui/label"
-import { Button } from "@/components/ui/button"
-import { Separator } from "@/components/ui/separator"
-import { QRCodeSVG } from "qrcode.react"
-import { Phone, Mail, Globe, Github, Linkedin, Twitter, Share2, Eye, Upload, X } from "lucide-react"
-import Link from "next/link"
+import { Button } from "@/components/ui/button";
+import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+import { Input } from "@/components/ui/input";
+import { Label } from "@/components/ui/label";
+import { Separator } from "@/components/ui/separator";
+import { Eye, Github, Globe, Linkedin, Mail, Phone, Share2, Twitter, Upload, X } from "lucide-react";
+import Link from "next/link";
+import { QRCodeSVG } from "qrcode.react";
+import { useState } from "react";
 
 interface ContactInfo {
-  name: string
-  phone: string
-  email: string
-  website: string
-  github: string
-  linkedin: string
-  twitter: string
+  name: string;
+  phone: string;
+  email: string;
+  website: string;
+  github: string;
+  linkedin: string;
+  twitter: string;
 }
 
 export default function NameCardPage() {
@@ -31,41 +31,41 @@ export default function NameCardPage() {
     github: "minhnq0702",
     linkedin: "minhne-dev",
     twitter: "",
-  })
+  });
 
-  const [profilePhoto, setProfilePhoto] = useState<string | null>("/images/profile-avatar.jpg")
+  const [profilePhoto, setProfilePhoto] = useState<string | null>("/images/profile-avatar.jpg");
 
   const handlePhotoUpload = (event: React.ChangeEvent<HTMLInputElement>) => {
-    const file = event.target.files?.[0]
+    const file = event.target.files?.[0];
     if (file) {
-      const reader = new FileReader()
+      const reader = new FileReader();
       reader.onload = (e) => {
-        setProfilePhoto(e.target?.result as string)
-      }
-      reader.readAsDataURL(file)
+        setProfilePhoto(e.target?.result as string);
+      };
+      reader.readAsDataURL(file);
     }
-  }
+  };
 
   const removePhoto = () => {
-    setProfilePhoto(null)
-  }
+    setProfilePhoto(null);
+  };
 
   const generateShareableUrl = () => {
-    const params = new URLSearchParams()
+    const params = new URLSearchParams();
     Object.entries(contactInfo).forEach(([key, value]) => {
-      if (value) params.set(key, value)
-    })
+      if (value) params.set(key, value);
+    });
     if (profilePhoto) {
-      params.set("photo", profilePhoto)
+      params.set("photo", profilePhoto);
     }
-    return `/card?${params.toString()}`
-  }
+    return `/card?${params.toString()}`;
+  };
 
   const copyShareLink = async () => {
-    const url = `${window.location.origin}${generateShareableUrl()}`
-    await navigator.clipboard.writeText(url)
+    const url = `${window.location.origin}${generateShareableUrl()}`;
+    await navigator.clipboard.writeText(url);
     // You could add a toast notification here
-  }
+  };
 
   const generateVCard = () => {
     const vcard = [
@@ -81,27 +81,27 @@ export default function NameCardPage() {
       "END:VCARD",
     ]
       .filter(Boolean)
-      .join("\n")
+      .join("\n");
 
-    return vcard
-  }
+    return vcard;
+  };
 
   const downloadVCard = () => {
-    const vcard = generateVCard()
-    const blob = new Blob([vcard], { type: "text/vcard" })
-    const url = URL.createObjectURL(blob)
-    const a = document.createElement("a")
-    a.href = url
-    a.download = `${contactInfo.name.replace(/\s+/g, "_")}.vcf`
-    document.body.appendChild(a)
-    a.click()
-    document.body.removeChild(a)
-    URL.revokeObjectURL(url)
-  }
+    const vcard = generateVCard();
+    const blob = new Blob([vcard], { type: "text/vcard" });
+    const url = URL.createObjectURL(blob);
+    const a = document.createElement("a");
+    a.href = url;
+    a.download = `${contactInfo.name.replace(/\s+/g, "_")}.vcf`;
+    document.body.appendChild(a);
+    a.click();
+    document.body.removeChild(a);
+    URL.revokeObjectURL(url);
+  };
 
   const updateField = (field: keyof ContactInfo, value: string) => {
-    setContactInfo((prev) => ({ ...prev, [field]: value }))
-  }
+    setContactInfo((prev) => ({ ...prev, [field]: value }));
+  };
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-black via-gray-900 to-gray-700 p-4">
@@ -413,5 +413,5 @@ export default function NameCardPage() {
         </div>
       </div>
     </div>
-  )
+  );
 }
