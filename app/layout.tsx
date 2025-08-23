@@ -24,7 +24,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en" className={spaceMono.className}>
+    <html lang="vi" className={spaceMono.className}>
       <head></head>
       <body>{children}</body>
     </html>
