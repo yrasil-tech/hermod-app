@@ -1,13 +1,13 @@
-"use client";
+'use client';
 
-import { useSearchParams } from "next/navigation";
-import { Card, CardContent } from "@/components/ui/card";
-import { Button } from "@/components/ui/button";
-import { Separator } from "@/components/ui/separator";
-import { QRCodeSVG } from "qrcode.react";
-import { Phone, Mail, Globe, Github, Linkedin, Twitter, Download, ArrowLeft, RotateCcw, Shield } from "lucide-react";
-import Link from "next/link";
-import { Suspense, useState } from "react";
+import { Button } from '@/components/ui/button';
+import { Card, CardContent } from '@/components/ui/card';
+import { Separator } from '@/components/ui/separator';
+import { Download, Github, Globe, Linkedin, Mail, Phone, RotateCcw, Shield, Twitter } from 'lucide-react';
+import Image from 'next/image';
+import { useSearchParams } from 'next/navigation';
+import { QRCodeSVG } from 'qrcode.react';
+import { Suspense, useState } from 'react';
 
 interface ContactInfo {
   name: string;
@@ -26,21 +26,21 @@ function CardDisplay() {
   const [isFlipped, setIsFlipped] = useState(false);
 
   const contactInfo: ContactInfo = {
-    name: searchParams.get("name") || "Lê Hiếu Giang",
-    title: searchParams.get("title") || "Hiệu trưởng",
-    phone: searchParams.get("phone") || "0938 308 141",
-    email: searchParams.get("email") || "gianglh@hcmute.edu.vn",
-    website: searchParams.get("website") || "https://hcmute.edu.vn/",
-    github: searchParams.get("github") || "",
-    linkedin: searchParams.get("linkedin") || "",
-    twitter: searchParams.get("twitter") || "",
-    photo: searchParams.get("photo") || "/images/le-hieu-giang.png",
+    name: searchParams.get('name') || 'Lê Hiếu Giang',
+    title: searchParams.get('title') || 'Hiệu trưởng',
+    phone: searchParams.get('phone') || '0938 308 141',
+    email: searchParams.get('email') || 'gianglh@hcmute.edu.vn',
+    website: searchParams.get('website') || 'https://hcmute.edu.vn/',
+    github: searchParams.get('github') || '',
+    linkedin: searchParams.get('linkedin') || '',
+    twitter: searchParams.get('twitter') || '',
+    photo: searchParams.get('photo') || '/images/le-hieu-giang.png',
   };
 
   const generateVCard = () => {
     const vcard = [
-      "BEGIN:VCARD",
-      "VERSION:3.0",
+      'BEGIN:VCARD',
+      'VERSION:3.0',
       `FN:${contactInfo.name}`,
       contactInfo.phone && `TEL:${contactInfo.phone}`,
       contactInfo.email && `EMAIL:${contactInfo.email}`,
@@ -48,21 +48,21 @@ function CardDisplay() {
       contactInfo.github && `URL:https://github.com/${contactInfo.github}`,
       contactInfo.linkedin && `URL:https://linkedin.com/in/${contactInfo.linkedin}`,
       contactInfo.twitter && `URL:https://twitter.com/${contactInfo.twitter}`,
-      "END:VCARD",
+      'END:VCARD',
     ]
       .filter(Boolean)
-      .join("\n");
+      .join('\n');
 
     return vcard;
   };
 
   const downloadVCard = () => {
     const vcard = generateVCard();
-    const blob = new Blob([vcard], { type: "text/vcard" });
+    const blob = new Blob([vcard], { type: 'text/vcard' });
     const url = URL.createObjectURL(blob);
-    const a = document.createElement("a");
+    const a = document.createElement('a');
     a.href = url;
-    a.download = `${contactInfo.name.replace(/\s+/g, "_")}.vcf`;
+    a.download = `${contactInfo.name.replace(/\s+/g, '_')}.vcf`;
     document.body.appendChild(a);
     a.click();
     document.body.removeChild(a);
@@ -70,111 +70,125 @@ function CardDisplay() {
   };
 
   return (
-    <div className="min-h-screen flex flex-col bg-gradient-to-br from-black via-gray-900 to-gray-700 ">
-      <div className="w-full bg-gray-900/95 backdrop-blur-sm border-b border-gray-700 z-20">
-        <div className="max-w-4xl mx-auto px-4 sm:px-6 py-3 sm:py-4 flex items-center justify-center gap-3 sm:gap-4">
-          <img src="/images/hcmute-logo.png" alt="HCMUTE Logo" className="w-8 h-8 sm:w-12 sm:h-12 object-contain" />
-          <div className="text-center">
-            <h1 className="text-base sm:text-xl font-bold text-white leading-tight">
+    <div className='flex min-h-screen flex-col bg-gradient-to-br from-black via-gray-900 to-gray-700'>
+      <div className='z-20 w-full border-b border-gray-700 bg-gray-900/95 backdrop-blur-sm'>
+        <div className='mx-auto flex max-w-4xl items-center justify-center gap-3 px-4 py-3 sm:gap-4 sm:px-6 sm:py-4'>
+          <Image
+            src='/images/hcmute-logo.png'
+            alt='HCMUTE Logo'
+            className='h-8 w-8 object-contain sm:h-12 sm:w-12'
+          />
+          <div className='text-center'>
+            <h1 className='text-base leading-tight font-bold text-white sm:text-xl'>
               Ho Chi Minh City University of Technology and Education
             </h1>
-            <p className="text-xs sm:text-sm text-gray-300">Official Digital Business Card</p>
+            <p className='text-xs text-gray-300 sm:text-sm'>Official Digital Business Card</p>
           </div>
         </div>
       </div>
 
-      <div className="flex-grow p-4 sm:py-12">
-        <div className="max-w-2xl mx-auto">
-          <div className="perspective-1000">
+      <div className='flex-grow p-4 sm:py-12'>
+        <div className='mx-auto max-w-2xl'>
+          <div className='perspective-1000'>
             <div
-              className={`relative w-full h-[480px] sm:h-[600px] transition-transform duration-700 transform-style-preserve-3d cursor-pointer ${
-                isFlipped ? "rotate-y-180" : ""
+              className={`transform-style-preserve-3d relative h-[480px] w-full cursor-pointer transition-transform duration-700 sm:h-[600px] ${
+                isFlipped ? 'rotate-y-180' : ''
               }`}
               onClick={() => setIsFlipped(!isFlipped)}
             >
-              <div className="absolute inset-0 backface-hidden">
-                <Card className="w-full h-full bg-gradient-to-br from-gray-800 via-gray-700 to-gray-600 shadow-2xl border border-gray-600 hover:shadow-3xl transition-shadow duration-300">
-                  <CardContent className="p-6 sm:p-12 h-full flex flex-col justify-center">
-                    <div className="text-center mb-6 sm:mb-10">
+              <div className='absolute inset-0 backface-hidden'>
+                <Card className='hover:shadow-3xl h-full w-full border border-gray-600 bg-gradient-to-br from-gray-800 via-gray-700 to-gray-600 shadow-2xl transition-shadow duration-300'>
+                  <CardContent className='flex h-full flex-col justify-center p-6 sm:p-12'>
+                    <div className='mb-6 text-center sm:mb-10'>
                       {contactInfo.photo ? (
                         <img
-                          src={contactInfo.photo || "/placeholder.svg"}
+                          src={contactInfo.photo || '/placeholder.svg'}
                           alt={contactInfo.name}
-                          className="w-20 h-20 sm:w-28 sm:h-28 rounded-full mx-auto mb-6 sm:mb-8 object-cover shadow-lg border-4 border-blue-500/30"
+                          className='mx-auto mb-6 h-20 w-20 rounded-full border-4 border-blue-500/30 object-cover shadow-lg sm:mb-8 sm:h-28 sm:w-28'
                         />
                       ) : (
-                        <div className="w-20 h-20 sm:w-28 sm:h-28 bg-gradient-to-br from-blue-500 via-blue-600 to-indigo-700 rounded-full mx-auto mb-6 sm:mb-8 flex items-center justify-center text-white text-2xl sm:text-4xl font-bold shadow-lg">
+                        <div className='mx-auto mb-6 flex h-20 w-20 items-center justify-center rounded-full bg-gradient-to-br from-blue-500 via-blue-600 to-indigo-700 text-2xl font-bold text-white shadow-lg sm:mb-8 sm:h-28 sm:w-28 sm:text-4xl'>
                           {contactInfo.name
-                            .split(" ")
+                            .split(' ')
                             .map((n) => n[0])
-                            .join("")
+                            .join('')
                             .toUpperCase()}
                         </div>
                       )}
-                      <h2 className="text-2xl sm:text-4xl font-bold text-white mb-2 tracking-tight">
+                      <h2 className='mb-2 text-2xl font-bold tracking-tight text-white sm:text-4xl'>
                         {contactInfo.name}
                       </h2>
-                      <p className="text-base sm:text-xl font-semibold text-gray-300 mb-2 tracking-tight">
+                      <p className='mb-2 text-base font-semibold tracking-tight text-gray-300 sm:text-xl'>
                         {contactInfo.title}
                       </p>
-                      <p className="text-gray-300 text-sm sm:text-lg">Click to view contact info</p>
+                      <p className='text-sm text-gray-300 sm:text-lg'>Click to view contact info</p>
                     </div>
 
-                    <div className="space-y-4 sm:space-y-6 mb-6 sm:mb-10">
+                    <div className='mb-6 space-y-4 sm:mb-10 sm:space-y-6'>
                       {contactInfo.phone && (
-                        <div className="flex items-center gap-3 sm:gap-4 text-gray-200">
-                          <div className="w-9 h-9 sm:w-12 sm:h-12 bg-blue-600/20 rounded-full flex items-center justify-center">
-                            <Phone className="w-5 h-5 sm:w-6 sm:h-6 text-blue-400" />
+                        <div className='flex items-center gap-3 text-gray-200 sm:gap-4'>
+                          <div className='flex h-9 w-9 items-center justify-center rounded-full bg-blue-600/20 sm:h-12 sm:w-12'>
+                            <Phone className='h-5 w-5 text-blue-400 sm:h-6 sm:w-6' />
                           </div>
-                          <span className="text-sm sm:text-lg font-medium">{contactInfo.phone}</span>
+                          <span className='text-sm font-medium sm:text-lg'>{contactInfo.phone}</span>
                         </div>
                       )}
 
                       {contactInfo.email && (
-                        <div className="flex items-center gap-3 sm:gap-4 text-gray-200">
-                          <div className="w-9 h-9 sm:w-12 sm:h-12 bg-blue-600/20 rounded-full flex items-center justify-center">
-                            <Mail className="w-5 h-5 sm:w-6 sm:h-6 text-blue-400" />
+                        <div className='flex items-center gap-3 text-gray-200 sm:gap-4'>
+                          <div className='flex h-9 w-9 items-center justify-center rounded-full bg-blue-600/20 sm:h-12 sm:w-12'>
+                            <Mail className='h-5 w-5 text-blue-400 sm:h-6 sm:w-6' />
                           </div>
-                          <span className="text-sm sm:text-lg font-medium break-words">{contactInfo.email}</span>
+                          <span className='text-sm font-medium break-words sm:text-lg'>
+                            {contactInfo.email}
+                          </span>
                         </div>
                       )}
 
                       {contactInfo.website && (
-                        <div className="flex items-center gap-3 sm:gap-4 text-gray-200">
-                          <div className="w-9 h-9 sm:w-12 sm:h-12 bg-blue-600/20 rounded-full flex items-center justify-center">
-                            <Globe className="w-5 h-5 sm:w-6 sm:h-6 text-blue-400" />
+                        <div className='flex items-center gap-3 text-gray-200 sm:gap-4'>
+                          <div className='flex h-9 w-9 items-center justify-center rounded-full bg-blue-600/20 sm:h-12 sm:w-12'>
+                            <Globe className='h-5 w-5 text-blue-400 sm:h-6 sm:w-6' />
                           </div>
-                          <span className="text-sm sm:text-lg font-medium break-all">{contactInfo.website}</span>
+                          <span className='text-sm font-medium break-all sm:text-lg'>
+                            {contactInfo.website}
+                          </span>
                         </div>
                       )}
                     </div>
 
                     {(contactInfo.github || contactInfo.linkedin || contactInfo.twitter) && (
                       <>
-                        <Separator className="my-6 sm:my-10 bg-gray-600" />
-                        <div className="flex justify-center gap-4 sm:gap-8 flex-wrap">
+                        <Separator className='my-6 bg-gray-600 sm:my-10' />
+                        <div className='flex flex-wrap justify-center gap-4 sm:gap-8'>
                           {contactInfo.github && (
-                            <div className="flex flex-col items-center gap-2 sm:gap-3 text-gray-300">
-                              <div className="w-10 h-10 sm:w-12 sm:h-12 bg-gray-700 rounded-full flex items-center justify-center">
-                                <Github className="w-5 h-5 sm:w-6 sm:h-6 text-gray-300" />
+                            <div className='flex flex-col items-center gap-2 text-gray-300 sm:gap-3'>
+                              <div className='flex h-10 w-10 items-center justify-center rounded-full bg-gray-700 sm:h-12 sm:w-12'>
+                                <Github className='h-5 w-5 text-gray-300 sm:h-6 sm:w-6' />
                               </div>
-                              <span className="text-xs sm:text-base font-medium break-all">{contactInfo.github}</span>
+                              <span className='text-xs font-medium break-all sm:text-base'>
+                                {contactInfo.github}
+                              </span>
                             </div>
                           )}
                           {contactInfo.linkedin && (
-                            <div className="flex flex-col items-center gap-2 sm:gap-3 text-gray-300">
-                              <div className="w-10 h-10 sm:w-12 sm:h-12 bg-gray-700 rounded-full flex items-center justify-center">
-                                <Linkedin className="w-5 h-5 sm:w-6 sm:h-6 text-gray-300" />
+                            <div className='flex flex-col items-center gap-2 text-gray-300 sm:gap-3'>
+                              <div className='flex h-10 w-10 items-center justify-center rounded-full bg-gray-700 sm:h-12 sm:w-12'>
+                                <Linkedin className='h-5 w-5 text-gray-300 sm:h-6 sm:w-6' />
                               </div>
-                              <span className="text-xs sm:text-base font-medium break-all">{contactInfo.linkedin}</span>
+                              <span className='text-xs font-medium break-all sm:text-base'>
+                                {contactInfo.linkedin}
+                              </span>
                             </div>
                           )}
                           {contactInfo.twitter && (
-                            <div className="flex flex-col items-center gap-2 sm:gap-3 text-gray-300">
-                              <div className="w-10 h-10 sm:w-12 sm:h-12 bg-gray-700 rounded-full flex items-center justify-center">
-                                <Twitter className="w-5 h-5 sm:w-6 sm:h-6 text-gray-300" />
+                            <div className='flex flex-col items-center gap-2 text-gray-300 sm:gap-3'>
+                              <div className='flex h-10 w-10 items-center justify-center rounded-full bg-gray-700 sm:h-12 sm:w-12'>
+                                <Twitter className='h-5 w-5 text-gray-300 sm:h-6 sm:w-6' />
                               </div>
-                              <span className="text-xs sm:text-base font-medium break-all">{contactInfo.twitter}</span>
+                              <span className='text-xs font-medium break-all sm:text-base'>
+                                {contactInfo.twitter}
+                              </span>
                             </div>
                           )}
                         </div>
@@ -184,18 +198,26 @@ function CardDisplay() {
                 </Card>
               </div>
 
-              <div className="absolute inset-0 backface-hidden rotate-y-180">
-                <Card className="w-full h-full bg-gradient-to-br from-gray-800 via-gray-700 to-gray-600 shadow-2xl border border-gray-600">
-                  <CardContent className="p-6 sm:p-12 h-full flex flex-col justify-center text-center">
-                    <div className="mb-6 sm:mb-8">
-                      <h3 className="text-xl sm:text-3xl font-bold text-white mb-3 sm:mb-4">Save to Contacts</h3>
-                      <p className="text-gray-300 text-sm sm:text-lg mb-6 sm:mb-8">
+              <div className='absolute inset-0 rotate-y-180 backface-hidden'>
+                <Card className='h-full w-full border border-gray-600 bg-gradient-to-br from-gray-800 via-gray-700 to-gray-600 shadow-2xl'>
+                  <CardContent className='flex h-full flex-col justify-center p-6 text-center sm:p-12'>
+                    <div className='mb-6 sm:mb-8'>
+                      <h3 className='mb-3 text-xl font-bold text-white sm:mb-4 sm:text-3xl'>
+                        Save to Contacts
+                      </h3>
+                      <p className='mb-6 text-sm text-gray-300 sm:mb-8 sm:text-lg'>
                         Scan with your phone camera to instantly add this contact
                       </p>
                     </div>
 
-                    <div className="bg-white p-4 sm:p-8 rounded-xl shadow-inner mb-6 sm:mb-8 inline-block mx-auto">
-                      <QRCodeSVG value={generateVCard()} size={150} level="M" includeMargin={true} fgColor="#1f2937" />
+                    <div className='mx-auto mb-6 inline-block rounded-xl bg-white p-4 shadow-inner sm:mb-8 sm:p-8'>
+                      <QRCodeSVG
+                        value={generateVCard()}
+                        size={150}
+                        level='M'
+                        includeMargin={true}
+                        fgColor='#1f2937'
+                      />
                     </div>
 
                     <Button
@@ -203,14 +225,14 @@ function CardDisplay() {
                         e.stopPropagation();
                         downloadVCard();
                       }}
-                      className="w-full h-10 sm:h-12 bg-blue-600 hover:bg-blue-700 text-white text-sm sm:text-lg mb-4 sm:mb-6"
+                      className='mb-4 h-10 w-full bg-blue-600 text-sm text-white hover:bg-blue-700 sm:mb-6 sm:h-12 sm:text-lg'
                     >
-                      <Download className="w-4 h-4 sm:w-5 sm:h-5 mr-2" />
+                      <Download className='mr-2 h-4 w-4 sm:h-5 sm:w-5' />
                       Download Contact File
                     </Button>
 
-                    <p className="text-gray-400 text-xs sm:text-sm flex items-center justify-center gap-1 sm:gap-2">
-                      <RotateCcw className="w-3 h-3 sm:w-4 sm:h-4" />
+                    <p className='flex items-center justify-center gap-1 text-xs text-gray-400 sm:gap-2 sm:text-sm'>
+                      <RotateCcw className='h-3 w-3 sm:h-4 sm:w-4' />
                       Click to flip back
                     </p>
                   </CardContent>
@@ -221,16 +243,18 @@ function CardDisplay() {
         </div>
       </div>
 
-      <div className="w-full bg-gray-900/95 backdrop-blur-sm border-t border-gray-700 mt-auto">
-        <div className="max-w-4xl mx-auto px-4 sm:px-6 py-3 sm:py-4">
-          <div className="flex items-center justify-center gap-2 sm:gap-3 text-gray-300 flex-wrap text-center">
-            <Shield className="w-4 h-4 sm:w-5 sm:h-5 text-green-400" />
-            <span className="text-xs sm:text-sm font-medium">
+      <div className='mt-auto w-full border-t border-gray-700 bg-gray-900/95 backdrop-blur-sm'>
+        <div className='mx-auto max-w-4xl px-4 py-3 sm:px-6 sm:py-4'>
+          <div className='flex flex-wrap items-center justify-center gap-2 text-center text-gray-300 sm:gap-3'>
+            <Shield className='h-4 w-4 text-green-400 sm:h-5 sm:w-5' />
+            <span className='text-xs font-medium sm:text-sm'>
               This digital business card is verified and issued by HCMUTE
             </span>
-            <div className="w-2 h-2 bg-green-400 rounded-full animate-pulse"></div>
+            <div className='h-2 w-2 animate-pulse rounded-full bg-green-400'></div>
           </div>
-          <p className="text-center text-[10px] sm:text-xs text-gray-400 mt-1">Authenticated • Secure • Official</p>
+          <p className='mt-1 text-center text-[10px] text-gray-400 sm:text-xs'>
+            Authenticated • Secure • Official
+          </p>
         </div>
       </div>
 

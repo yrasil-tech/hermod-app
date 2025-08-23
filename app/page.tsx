@@ -1,16 +1,16 @@
-"use client";
+'use client';
 
-import type React from "react";
+import type React from 'react';
 
-import { Button } from "@/components/ui/button";
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
-import { Input } from "@/components/ui/input";
-import { Label } from "@/components/ui/label";
-import { Separator } from "@/components/ui/separator";
-import { Eye, Github, Globe, Linkedin, Mail, Phone, Share2, Twitter, Upload, X } from "lucide-react";
-import Link from "next/link";
-import { QRCodeSVG } from "qrcode.react";
-import { useState } from "react";
+import { Button } from '@/components/ui/button';
+import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
+import { Input } from '@/components/ui/input';
+import { Label } from '@/components/ui/label';
+import { Separator } from '@/components/ui/separator';
+import { Eye, Github, Globe, Linkedin, Mail, Phone, Share2, Twitter, Upload, X } from 'lucide-react';
+import Link from 'next/link';
+import { QRCodeSVG } from 'qrcode.react';
+import { useState } from 'react';
 
 interface ContactInfo {
   name: string;
@@ -24,16 +24,16 @@ interface ContactInfo {
 
 export default function NameCardPage() {
   const [contactInfo, setContactInfo] = useState<ContactInfo>({
-    name: "Nguyễn Quang Minh",
-    phone: "0777674857",
-    email: "minhnq.dev@gmail.com",
-    website: "https://yrasil.dev",
-    github: "minhnq0702",
-    linkedin: "minhne-dev",
-    twitter: "",
+    name: 'Nguyễn Quang Minh',
+    phone: '0777674857',
+    email: 'minhnq.dev@gmail.com',
+    website: 'https://yrasil.dev',
+    github: 'minhnq0702',
+    linkedin: 'minhne-dev',
+    twitter: '',
   });
 
-  const [profilePhoto, setProfilePhoto] = useState<string | null>("/images/profile-avatar.jpg");
+  const [profilePhoto, setProfilePhoto] = useState<string | null>('/images/profile-avatar.jpg');
 
   const handlePhotoUpload = (event: React.ChangeEvent<HTMLInputElement>) => {
     const file = event.target.files?.[0];
@@ -56,7 +56,7 @@ export default function NameCardPage() {
       if (value) params.set(key, value);
     });
     if (profilePhoto) {
-      params.set("photo", profilePhoto);
+      params.set('photo', profilePhoto);
     }
     return `/card?${params.toString()}`;
   };
@@ -69,8 +69,8 @@ export default function NameCardPage() {
 
   const generateVCard = () => {
     const vcard = [
-      "BEGIN:VCARD",
-      "VERSION:3.0",
+      'BEGIN:VCARD',
+      'VERSION:3.0',
       `FN:${contactInfo.name}`,
       `TEL:${contactInfo.phone}`,
       `EMAIL:${contactInfo.email}`,
@@ -78,21 +78,21 @@ export default function NameCardPage() {
       contactInfo.github && `URL:https://github.com/${contactInfo.github}`,
       contactInfo.linkedin && `URL:https://linkedin.com/in/${contactInfo.linkedin}`,
       contactInfo.twitter && `URL:https://twitter.com/${contactInfo.twitter}`,
-      "END:VCARD",
+      'END:VCARD',
     ]
       .filter(Boolean)
-      .join("\n");
+      .join('\n');
 
     return vcard;
   };
 
   const downloadVCard = () => {
     const vcard = generateVCard();
-    const blob = new Blob([vcard], { type: "text/vcard" });
+    const blob = new Blob([vcard], { type: 'text/vcard' });
     const url = URL.createObjectURL(blob);
-    const a = document.createElement("a");
+    const a = document.createElement('a');
     a.href = url;
-    a.download = `${contactInfo.name.replace(/\s+/g, "_")}.vcf`;
+    a.download = `${contactInfo.name.replace(/\s+/g, '_')}.vcf`;
     document.body.appendChild(a);
     a.click();
     document.body.removeChild(a);
@@ -104,207 +104,210 @@ export default function NameCardPage() {
   };
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-black via-gray-900 to-gray-700 p-4">
-      <div className="max-w-7xl mx-auto">
-        <div className="text-center mb-12">
-          <h1 className="text-5xl font-bold text-white mb-4 tracking-tight">Professional Name Card</h1>
-          <p className="text-xl text-gray-300 max-w-2xl mx-auto leading-relaxed">
+    <div className='min-h-screen bg-gradient-to-br from-black via-gray-900 to-gray-700 p-4'>
+      <div className='mx-auto max-w-7xl'>
+        <div className='mb-12 text-center'>
+          <h1 className='mb-4 text-5xl font-bold tracking-tight text-white'>Professional Name Card</h1>
+          <p className='mx-auto max-w-2xl text-xl leading-relaxed text-gray-300'>
             Create and share your digital business card with QR code technology
           </p>
         </div>
 
-        <div className="grid lg:grid-cols-2 gap-12">
-          <Card className="h-fit shadow-2xl border border-gray-700 bg-gray-900/90 backdrop-blur-sm">
-            <CardHeader className="pb-6">
-              <CardTitle className="flex items-center gap-3 text-xl text-white">
-                <div className="w-3 h-3 bg-blue-400 rounded-full"></div>
+        <div className='grid gap-12 lg:grid-cols-2'>
+          <Card className='h-fit border border-gray-700 bg-gray-900/90 shadow-2xl backdrop-blur-sm'>
+            <CardHeader className='pb-6'>
+              <CardTitle className='flex items-center gap-3 text-xl text-white'>
+                <div className='h-3 w-3 rounded-full bg-blue-400'></div>
                 Customize Your Card
               </CardTitle>
             </CardHeader>
-            <CardContent className="space-y-6">
-              <div className="space-y-4">
-                <Label className="text-sm font-medium text-gray-200">Profile Photo</Label>
-                <div className="flex items-center gap-4">
-                  <div className="w-20 h-20 rounded-full overflow-hidden bg-gradient-to-br from-blue-500 via-blue-600 to-indigo-700 flex items-center justify-center">
+            <CardContent className='space-y-6'>
+              <div className='space-y-4'>
+                <Label className='text-sm font-medium text-gray-200'>Profile Photo</Label>
+                <div className='flex items-center gap-4'>
+                  <div className='flex h-20 w-20 items-center justify-center overflow-hidden rounded-full bg-gradient-to-br from-blue-500 via-blue-600 to-indigo-700'>
                     {profilePhoto ? (
                       <img
-                        src={profilePhoto || "/placeholder.svg"}
-                        alt="Profile"
-                        className="w-full h-full object-cover"
+                        src={profilePhoto || '/placeholder.svg'}
+                        alt='Profile'
+                        className='h-full w-full object-cover'
                       />
                     ) : (
-                      <span className="text-white text-xl font-bold">
+                      <span className='text-xl font-bold text-white'>
                         {contactInfo.name
-                          .split(" ")
+                          .split(' ')
                           .map((n) => n[0])
-                          .join("")
+                          .join('')
                           .toUpperCase()}
                       </span>
                     )}
                   </div>
-                  <div className="flex gap-2">
-                    <Label htmlFor="photo-upload" className="cursor-pointer">
+                  <div className='flex gap-2'>
+                    <Label htmlFor='photo-upload' className='cursor-pointer'>
                       <Button
-                        type="button"
-                        variant="outline"
-                        size="sm"
-                        className="bg-gray-800 border-gray-600 text-gray-200 hover:bg-gray-700"
+                        type='button'
+                        variant='outline'
+                        size='sm'
+                        className='border-gray-600 bg-gray-800 text-gray-200 hover:bg-gray-700'
                         asChild
                       >
                         <span>
-                          <Upload className="w-4 h-4 mr-2" />
+                          <Upload className='mr-2 h-4 w-4' />
                           Upload
                         </span>
                       </Button>
                     </Label>
                     <Input
-                      id="photo-upload"
-                      type="file"
-                      accept="image/*"
+                      id='photo-upload'
+                      type='file'
+                      accept='image/*'
                       onChange={handlePhotoUpload}
-                      className="hidden"
+                      className='hidden'
                     />
                     {profilePhoto && (
                       <Button
-                        type="button"
-                        variant="outline"
-                        size="sm"
+                        type='button'
+                        variant='outline'
+                        size='sm'
                         onClick={removePhoto}
-                        className="bg-gray-800 border-gray-600 text-gray-200 hover:bg-gray-700"
+                        className='border-gray-600 bg-gray-800 text-gray-200 hover:bg-gray-700'
                       >
-                        <X className="w-4 h-4" />
+                        <X className='h-4 w-4' />
                       </Button>
                     )}
                   </div>
                 </div>
               </div>
 
-              <Separator className="my-6 bg-gray-700" />
+              <Separator className='my-6 bg-gray-700' />
 
-              <div className="grid gap-4">
-                <div className="space-y-2">
-                  <Label htmlFor="name" className="text-sm font-medium text-gray-200">
+              <div className='grid gap-4'>
+                <div className='space-y-2'>
+                  <Label htmlFor='name' className='text-sm font-medium text-gray-200'>
                     Full Name
                   </Label>
                   <Input
-                    id="name"
+                    id='name'
                     value={contactInfo.name}
-                    onChange={(e) => updateField("name", e.target.value)}
-                    placeholder="Enter your full name"
-                    className="h-11 bg-gray-800 border-gray-600 text-white placeholder:text-gray-400"
+                    onChange={(e) => updateField('name', e.target.value)}
+                    placeholder='Enter your full name'
+                    className='h-11 border-gray-600 bg-gray-800 text-white placeholder:text-gray-400'
                   />
                 </div>
 
-                <div className="space-y-2">
-                  <Label htmlFor="phone" className="text-sm font-medium text-gray-200">
+                <div className='space-y-2'>
+                  <Label htmlFor='phone' className='text-sm font-medium text-gray-200'>
                     Phone Number
                   </Label>
                   <Input
-                    id="phone"
+                    id='phone'
                     value={contactInfo.phone}
-                    onChange={(e) => updateField("phone", e.target.value)}
-                    placeholder="+1 (555) 123-4567"
-                    className="h-11 bg-gray-800 border-gray-600 text-white placeholder:text-gray-400"
+                    onChange={(e) => updateField('phone', e.target.value)}
+                    placeholder='+1 (555) 123-4567'
+                    className='h-11 border-gray-600 bg-gray-800 text-white placeholder:text-gray-400'
                   />
                 </div>
 
-                <div className="space-y-2">
-                  <Label htmlFor="email" className="text-sm font-medium text-gray-200">
+                <div className='space-y-2'>
+                  <Label htmlFor='email' className='text-sm font-medium text-gray-200'>
                     Email Address
                   </Label>
                   <Input
-                    id="email"
-                    type="email"
+                    id='email'
+                    type='email'
                     value={contactInfo.email}
-                    onChange={(e) => updateField("email", e.target.value)}
-                    placeholder="your.email@example.com"
-                    className="h-11 bg-gray-800 border-gray-600 text-white placeholder:text-gray-400"
+                    onChange={(e) => updateField('email', e.target.value)}
+                    placeholder='your.email@example.com'
+                    className='h-11 border-gray-600 bg-gray-800 text-white placeholder:text-gray-400'
                   />
                 </div>
               </div>
 
-              <Separator className="my-6 bg-gray-700" />
+              <Separator className='my-6 bg-gray-700' />
 
-              <div className="space-y-4">
-                <h3 className="font-semibold text-gray-100">Online Presence</h3>
+              <div className='space-y-4'>
+                <h3 className='font-semibold text-gray-100'>Online Presence</h3>
 
-                <div className="grid gap-4">
-                  <div className="space-y-2">
-                    <Label htmlFor="website" className="text-sm font-medium text-gray-200">
+                <div className='grid gap-4'>
+                  <div className='space-y-2'>
+                    <Label htmlFor='website' className='text-sm font-medium text-gray-200'>
                       Website
                     </Label>
                     <Input
-                      id="website"
+                      id='website'
                       value={contactInfo.website}
-                      onChange={(e) => updateField("website", e.target.value)}
-                      placeholder="https://yourwebsite.com"
-                      className="h-11 bg-gray-800 border-gray-600 text-white placeholder:text-gray-400"
+                      onChange={(e) => updateField('website', e.target.value)}
+                      placeholder='https://yourwebsite.com'
+                      className='h-11 border-gray-600 bg-gray-800 text-white placeholder:text-gray-400'
                     />
                   </div>
 
-                  <div className="space-y-2">
-                    <Label htmlFor="github" className="text-sm font-medium text-gray-200">
+                  <div className='space-y-2'>
+                    <Label htmlFor='github' className='text-sm font-medium text-gray-200'>
                       GitHub Username
                     </Label>
                     <Input
-                      id="github"
+                      id='github'
                       value={contactInfo.github}
-                      onChange={(e) => updateField("github", e.target.value)}
-                      placeholder="yourusername"
-                      className="h-11 bg-gray-800 border-gray-600 text-white placeholder:text-gray-400"
+                      onChange={(e) => updateField('github', e.target.value)}
+                      placeholder='yourusername'
+                      className='h-11 border-gray-600 bg-gray-800 text-white placeholder:text-gray-400'
                     />
                   </div>
 
-                  <div className="space-y-2">
-                    <Label htmlFor="linkedin" className="text-sm font-medium text-gray-200">
+                  <div className='space-y-2'>
+                    <Label htmlFor='linkedin' className='text-sm font-medium text-gray-200'>
                       LinkedIn Username
                     </Label>
                     <Input
-                      id="linkedin"
+                      id='linkedin'
                       value={contactInfo.linkedin}
-                      onChange={(e) => updateField("linkedin", e.target.value)}
-                      placeholder="yourusername"
-                      className="h-11 bg-gray-800 border-gray-600 text-white placeholder:text-gray-400"
+                      onChange={(e) => updateField('linkedin', e.target.value)}
+                      placeholder='yourusername'
+                      className='h-11 border-gray-600 bg-gray-800 text-white placeholder:text-gray-400'
                     />
                   </div>
 
-                  <div className="space-y-2">
-                    <Label htmlFor="twitter" className="text-sm font-medium text-gray-200">
+                  <div className='space-y-2'>
+                    <Label htmlFor='twitter' className='text-sm font-medium text-gray-200'>
                       Twitter/X Username
                     </Label>
                     <Input
-                      id="twitter"
+                      id='twitter'
                       value={contactInfo.twitter}
-                      onChange={(e) => updateField("twitter", e.target.value)}
-                      placeholder="yourusername"
-                      className="h-11 bg-gray-800 border-gray-600 text-white placeholder:text-gray-400"
+                      onChange={(e) => updateField('twitter', e.target.value)}
+                      placeholder='yourusername'
+                      className='h-11 border-gray-600 bg-gray-800 text-white placeholder:text-gray-400'
                     />
                   </div>
                 </div>
               </div>
 
-              <div className="space-y-3 pt-6">
-                <Button onClick={downloadVCard} className="w-full h-11 bg-blue-600 hover:bg-blue-700 text-white">
+              <div className='space-y-3 pt-6'>
+                <Button
+                  onClick={downloadVCard}
+                  className='h-11 w-full bg-blue-600 text-white hover:bg-blue-700'
+                >
                   Download vCard File
                 </Button>
 
-                <div className="grid grid-cols-2 gap-3">
-                  <Link href={generateShareableUrl()} target="_blank">
+                <div className='grid grid-cols-2 gap-3'>
+                  <Link href={generateShareableUrl()} target='_blank'>
                     <Button
-                      variant="outline"
-                      className="w-full h-11 bg-gray-800 border-gray-600 text-gray-200 hover:bg-gray-700"
+                      variant='outline'
+                      className='h-11 w-full border-gray-600 bg-gray-800 text-gray-200 hover:bg-gray-700'
                     >
-                      <Eye className="w-4 h-4 mr-2" />
+                      <Eye className='mr-2 h-4 w-4' />
                       Preview
                     </Button>
                   </Link>
 
                   <Button
-                    variant="outline"
+                    variant='outline'
                     onClick={copyShareLink}
-                    className="w-full h-11 bg-gray-800 border-gray-600 text-gray-200 hover:bg-gray-700"
+                    className='h-11 w-full border-gray-600 bg-gray-800 text-gray-200 hover:bg-gray-700'
                   >
-                    <Share2 className="w-4 h-4 mr-2" />
+                    <Share2 className='mr-2 h-4 w-4' />
                     Share Link
                   </Button>
                 </div>
@@ -312,100 +315,106 @@ export default function NameCardPage() {
             </CardContent>
           </Card>
 
-          <div className="space-y-8">
-            <Card className="bg-gradient-to-br from-gray-800 via-gray-700 to-gray-600 shadow-2xl border border-gray-600">
-              <CardContent className="p-10">
-                <div className="text-center mb-8">
-                  <div className="w-24 h-24 rounded-full mx-auto mb-6 overflow-hidden shadow-lg">
+          <div className='space-y-8'>
+            <Card className='border border-gray-600 bg-gradient-to-br from-gray-800 via-gray-700 to-gray-600 shadow-2xl'>
+              <CardContent className='p-10'>
+                <div className='mb-8 text-center'>
+                  <div className='mx-auto mb-6 h-24 w-24 overflow-hidden rounded-full shadow-lg'>
                     {profilePhoto ? (
                       <img
-                        src={profilePhoto || "/placeholder.svg"}
+                        src={profilePhoto || '/placeholder.svg'}
                         alt={contactInfo.name}
-                        className="w-full h-full object-cover"
+                        className='h-full w-full object-cover'
                       />
                     ) : (
-                      <div className="w-full h-full bg-gradient-to-br from-blue-500 via-blue-600 to-indigo-700 flex items-center justify-center text-white text-3xl font-bold">
+                      <div className='flex h-full w-full items-center justify-center bg-gradient-to-br from-blue-500 via-blue-600 to-indigo-700 text-3xl font-bold text-white'>
                         {contactInfo.name
-                          .split(" ")
+                          .split(' ')
                           .map((n) => n[0])
-                          .join("")
+                          .join('')
                           .toUpperCase()}
                       </div>
                     )}
                   </div>
-                  <h2 className="text-3xl font-bold text-white mb-2 tracking-tight">{contactInfo.name}</h2>
+                  <h2 className='mb-2 text-3xl font-bold tracking-tight text-white'>{contactInfo.name}</h2>
                 </div>
 
-                <div className="space-y-4 mb-8">
+                <div className='mb-8 space-y-4'>
                   {contactInfo.phone && (
-                    <div className="flex items-center gap-4 text-gray-200">
-                      <div className="w-10 h-10 bg-blue-600/20 rounded-full flex items-center justify-center">
-                        <Phone className="w-5 h-5 text-blue-400" />
+                    <div className='flex items-center gap-4 text-gray-200'>
+                      <div className='flex h-10 w-10 items-center justify-center rounded-full bg-blue-600/20'>
+                        <Phone className='h-5 w-5 text-blue-400' />
                       </div>
-                      <span className="text-base font-medium">{contactInfo.phone}</span>
+                      <span className='text-base font-medium'>{contactInfo.phone}</span>
                     </div>
                   )}
 
                   {contactInfo.email && (
-                    <div className="flex items-center gap-4 text-gray-200">
-                      <div className="w-10 h-10 bg-blue-600/20 rounded-full flex items-center justify-center">
-                        <Mail className="w-5 h-5 text-blue-400" />
+                    <div className='flex items-center gap-4 text-gray-200'>
+                      <div className='flex h-10 w-10 items-center justify-center rounded-full bg-blue-600/20'>
+                        <Mail className='h-5 w-5 text-blue-400' />
                       </div>
-                      <span className="text-base font-medium">{contactInfo.email}</span>
+                      <span className='text-base font-medium'>{contactInfo.email}</span>
                     </div>
                   )}
 
                   {contactInfo.website && (
-                    <div className="flex items-center gap-4 text-gray-200">
-                      <div className="w-10 h-10 bg-blue-600/20 rounded-full flex items-center justify-center">
-                        <Globe className="w-5 h-5 text-blue-400" />
+                    <div className='flex items-center gap-4 text-gray-200'>
+                      <div className='flex h-10 w-10 items-center justify-center rounded-full bg-blue-600/20'>
+                        <Globe className='h-5 w-5 text-blue-400' />
                       </div>
-                      <span className="text-base font-medium">{contactInfo.website}</span>
+                      <span className='text-base font-medium'>{contactInfo.website}</span>
                     </div>
                   )}
                 </div>
 
-                <Separator className="my-8 bg-gray-600" />
+                <Separator className='my-8 bg-gray-600' />
 
-                <div className="flex justify-center gap-6">
+                <div className='flex justify-center gap-6'>
                   {contactInfo.github && (
-                    <div className="flex flex-col items-center gap-2 text-gray-300">
-                      <div className="w-10 h-10 bg-gray-700 rounded-full flex items-center justify-center">
-                        <Github className="w-5 h-5 text-gray-300" />
+                    <div className='flex flex-col items-center gap-2 text-gray-300'>
+                      <div className='flex h-10 w-10 items-center justify-center rounded-full bg-gray-700'>
+                        <Github className='h-5 w-5 text-gray-300' />
                       </div>
-                      <span className="text-sm font-medium">{contactInfo.github}</span>
+                      <span className='text-sm font-medium'>{contactInfo.github}</span>
                     </div>
                   )}
 
                   {contactInfo.linkedin && (
-                    <div className="flex flex-col items-center gap-2 text-gray-300">
-                      <div className="w-10 h-10 bg-gray-700 rounded-full flex items-center justify-center">
-                        <Linkedin className="w-5 h-5 text-gray-300" />
+                    <div className='flex flex-col items-center gap-2 text-gray-300'>
+                      <div className='flex h-10 w-10 items-center justify-center rounded-full bg-gray-700'>
+                        <Linkedin className='h-5 w-5 text-gray-300' />
                       </div>
-                      <span className="text-sm font-medium">{contactInfo.linkedin}</span>
+                      <span className='text-sm font-medium'>{contactInfo.linkedin}</span>
                     </div>
                   )}
 
                   {contactInfo.twitter && (
-                    <div className="flex flex-col items-center gap-2 text-gray-300">
-                      <div className="w-10 h-10 bg-gray-700 rounded-full flex items-center justify-center">
-                        <Twitter className="w-5 h-5 text-gray-300" />
+                    <div className='flex flex-col items-center gap-2 text-gray-300'>
+                      <div className='flex h-10 w-10 items-center justify-center rounded-full bg-gray-700'>
+                        <Twitter className='h-5 w-5 text-gray-300' />
                       </div>
-                      <span className="text-sm font-medium">{contactInfo.twitter}</span>
+                      <span className='text-sm font-medium'>{contactInfo.twitter}</span>
                     </div>
                   )}
                 </div>
               </CardContent>
             </Card>
 
-            <Card className="shadow-2xl border border-gray-700 bg-gray-900/90 backdrop-blur-sm">
-              <CardHeader className="text-center pb-4">
-                <CardTitle className="text-xl text-white">Scan to Save Contact</CardTitle>
-                <p className="text-sm text-gray-300">Point your camera at the QR code to add to contacts</p>
+            <Card className='border border-gray-700 bg-gray-900/90 shadow-2xl backdrop-blur-sm'>
+              <CardHeader className='pb-4 text-center'>
+                <CardTitle className='text-xl text-white'>Scan to Save Contact</CardTitle>
+                <p className='text-sm text-gray-300'>Point your camera at the QR code to add to contacts</p>
               </CardHeader>
-              <CardContent className="flex justify-center pb-8">
-                <div className="bg-white p-6 rounded-xl shadow-inner">
-                  <QRCodeSVG value={generateVCard()} size={220} level="M" includeMargin={true} fgColor="#1f2937" />
+              <CardContent className='flex justify-center pb-8'>
+                <div className='rounded-xl bg-white p-6 shadow-inner'>
+                  <QRCodeSVG
+                    value={generateVCard()}
+                    size={220}
+                    level='M'
+                    includeMargin={true}
+                    fgColor='#1f2937'
+                  />
                 </div>
               </CardContent>
             </Card>
